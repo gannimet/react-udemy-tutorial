@@ -1,13 +1,13 @@
 import React from 'react';
 import './App.css';
-import CounterManagement from './components/CounterManagement';
+import UserManagement from './components/UserManagement/index';
 
 class App extends React.Component {
   render() {
     return (
       <>
-        <h1>My App</h1>
-        <CounterManagement ownerName="Richard" />
+        <h1>User Management</h1>
+        <UserManagement minCount={1} maxCount={10} />
       </>
     )
   }

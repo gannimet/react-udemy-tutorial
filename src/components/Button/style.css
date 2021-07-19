@@ -1,4 +1,13 @@
-.primary {
-  background-color: blue;
+button {
   color: white;
+  padding: 10px;
+  border-radius: 3px;
+}
+
+.primary {
+  background-color: #005cf1;
+}
+
+.default {
+  background-color: #04b22fc8;
 }

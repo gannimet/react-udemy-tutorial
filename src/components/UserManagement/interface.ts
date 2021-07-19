@@ -1,10 +1,11 @@
-export interface CounterManagementProps {
-  ownerName: string;
+export interface UserManagementProps {
+  minCount: number;
+  maxCount: number;
 }
 
-export interface CounterManagementState {
-  user: number;
-  userData?: UserData;
+export interface UserManagementState {
+  userData: UserData[];
+  displayCount: number;
 }
 
 export interface UserData {

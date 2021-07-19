@@ -1,0 +1,7 @@
+.button-row > button:not(:last-child) {
+  margin-right: 8px;
+}
+
+button:disabled {
+  opacity: 0.5;
+}
