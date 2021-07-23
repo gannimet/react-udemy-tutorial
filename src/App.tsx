@@ -1,16 +1,16 @@
 import React from 'react';
 import './App.css';
-import CounterManagement from './components/CounterManagement';
+import NewsFeed from './components/NewsFeed';
+import Profile from './components/Profile';
 
-class App extends React.Component {
-  render() {
-    return (
-      <>
-        <h1>My App</h1>
-        <CounterManagement ownerName="Richard" />
-      </>
-    )
-  }
+export const App: React.FC = () => {
+  return (
+    <>
+      <h1>My App</h1>
+      <Profile ownerName="Richard" />
+      <NewsFeed />
+    </>
+  );
 }
 
 export default App;
