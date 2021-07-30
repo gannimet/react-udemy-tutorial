@@ -1,12 +1,12 @@
 import React from 'react';
 import './App.css';
-import FormElements from './components/FormElements';
+import HomePage from './components/HomePage';
 
 const App: React.FC = () => {
   return (
-    <div className="App">
-      <FormElements />
-    </div>
+    <>
+      <HomePage />
+    </>
   )
 };
 
