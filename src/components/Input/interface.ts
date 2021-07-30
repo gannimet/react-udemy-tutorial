@@ -1,3 +1,9 @@
+import { ChangeEventHandler } from 'react';
+
 export interface InputProps {
-  inputRef: React.RefObject<HTMLInputElement>;
+  label: string;
+  onChange: ChangeEventHandler<HTMLInputElement>;
+  value: any;
+  errorMessage: string;
+  hasError: boolean;
 }

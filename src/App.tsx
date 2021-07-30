@@ -1,12 +1,15 @@
 import React from 'react';
 import './App.css';
-import FormElements from './components/FormElements';
+import StudentGrades from './components/StudentGrades';
+import { StudentGradesContextProvider } from './context/StudentGradesContext';
 
 const App: React.FC = () => {
   return (
-    <div className="App">
-      <FormElements />
-    </div>
+    <>
+      <StudentGradesContextProvider>
+        <StudentGrades />
+      </StudentGradesContextProvider>
+    </>
   )
 };
 
