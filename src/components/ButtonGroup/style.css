@@ -1,0 +1,11 @@
+.button-group {
+  display: inline-flex;
+}
+
+.button-group.row {
+  flex-direction: row;
+}
+
+.button-group.column {
+  flex-direction: column;
+}

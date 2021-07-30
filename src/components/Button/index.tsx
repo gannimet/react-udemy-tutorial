@@ -6,7 +6,9 @@ const Button: React.FC<ButtonProps> = ({ type, className, children, onClick }) =
   const currentType = type || 'default';
   
   return (
-    <button className={`button-${currentType} ${className || ''}`} onClick={onClick}>{children}</button>
+    <button
+      className={`button-${currentType} ${className || ''}`}
+      onClick={onClick}>{children}</button>
   )
 };
 
