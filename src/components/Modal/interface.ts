@@ -3,4 +3,6 @@ export interface ModalProps {
   onClose?(): void;
 }
 
-export interface ModalState {}
+export interface ModalState {
+  weekdayName: string;
+}

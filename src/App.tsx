@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
-import HomePage from './components/HomePage';
+import MessageSender from './components/MessageSender';
 
 const App: React.FC = () => {
   return (
     <div>
-      <HomePage />
+      <MessageSender />
     </div>
   )
 };
