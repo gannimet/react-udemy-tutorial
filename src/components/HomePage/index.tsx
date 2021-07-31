@@ -1,19 +1,33 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import Profile from '../Profile';
+import Modal from '../Modal';
+import { HomePageState } from './interface';
 
-class HomePage extends React.Component {
-  profileRef = React.createRef<Profile>();
+class HomePage extends React.Component<{}, HomePageState> {
+  constructor(props: {}) {
+    super(props);
 
-  componentDidMount() {
-    console.log(ReactDOM.findDOMNode(this.profileRef.current));
+    this.state = {
+      showModal: true,
+    }
+  }
+
+  handleCloseModal = () => {
+    this.setState({
+      showModal: false
+    })
+  }
+
+  checkEventPropagation = () => {
+    console.log('Home Page click');
   }
 
   render() {
+    const { showModal } = this.state;
+
     return (
-      <div>
+      <div onClick={this.checkEventPropagation}>
         <h1>Home Page</h1>
-        <Profile ref={this.profileRef} />
+        <Modal show={showModal} onClose={this.handleCloseModal} />
       </div>
     )
   }
