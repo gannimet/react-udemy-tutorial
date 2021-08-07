@@ -1,20 +1,18 @@
-import { createBrowserHistory } from 'history';
 import React from 'react';
-import { Route, Router, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 import AboutPage from './components/AboutPage';
 import HomePage from './components/HomePage';
 
-const history = createBrowserHistory();
-
 const App: React.FC = () => {
   return (
-    <Router history={history}>
+    <BrowserRouter>
       <Switch>
-        <Route exact component={AboutPage} path="/:username/about" />
-        <Route exact component={HomePage} path="/" />
+        <Route component={AboutPage} path="/:username/about" />
+        <Route render={(routeProps) => <HomePage {...routeProps} />} path="/home" />
+        <Route children={(routeProps) => routeProps.match ? <HomePage {...routeProps} /> : <div>Does not match</div>} path="/" />
       </Switch>
-    </Router>
+    </BrowserRouter>
   )
 };
 
