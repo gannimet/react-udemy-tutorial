@@ -28,7 +28,15 @@ class LoginPage extends React.Component<LoginPageProps, LoginPageState> {
   }
 
   handleLoginClick = (context: LoginContextType) => {
-    context.setLoginStatus(true);
+    const { username, password } = this.state;
+
+    if (username === 'hans' && password === 'abc') {
+      context.setLoginStatus(true);
+    } else {
+      this.setState({
+        hasError: true,
+      })
+    }
   }
 
   render() {

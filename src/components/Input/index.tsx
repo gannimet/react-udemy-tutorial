@@ -1,5 +1,6 @@
 import React from 'react';
 import { InputProps, InputState } from './interface';
+import './style.css';
 
 class Input extends React.Component<InputProps, InputState> {
   render() {

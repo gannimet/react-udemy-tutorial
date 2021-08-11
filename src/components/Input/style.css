@@ -1,0 +1,8 @@
+.has-error {
+  color: crimson;
+}
+
+.has-error input {
+  outline-color: crimson;
+  border-color: crimson;
+}
