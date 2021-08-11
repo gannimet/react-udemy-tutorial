@@ -9,7 +9,7 @@ class Fruits extends React.Component<FruitsProps> {
     return (
       <div>
         <h1>Owner: {ownerName}</h1>
-        <h1>Frutis</h1>
+        <h1>Fruits</h1>
         <ul>
           {fruits.map((fruit) => <li key={fruit}>{fruit}</li>)}
         </ul>
