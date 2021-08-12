@@ -5,9 +5,12 @@ import { createStore } from 'redux';
 import './App.css';
 import AboutPage from './components/AboutPage';
 import HomePage from './components/HomePage';
-import { fruitsReducer } from './reducers/fruitsReducer';
+import { rootReducer } from './reducers/rootReducer';
 
-const store = createStore(fruitsReducer, ['apple', 'avocado']);
+const store = createStore(rootReducer, {
+  users: ['Richard', 'Konstantin'],
+  fruits: ['apple', 'avocado']
+});
 
 const App: React.FC = () => {
   return (
