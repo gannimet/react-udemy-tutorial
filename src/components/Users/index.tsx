@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
-import { rootReducer } from '../../reducers/rootReducer';
+import { rootReducer } from '../../store/reducers/rootReducer';
 import { UsersDispatchProps, UsersOwnProps, UsersProps, UsersStateProps } from './interface';
 
 class Users extends React.Component<UsersProps> {

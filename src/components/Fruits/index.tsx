@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
-import { rootReducer } from '../../reducers/rootReducer';
+import FruitsActions from '../../store/actions/fruitsActions';
+import { rootReducer } from '../../store/reducers/rootReducer';
 import { FruitsDispatchProps, FruitsOwnProps, FruitsProps, FruitsStateProps } from './interface';
 
 class Fruits extends React.Component<FruitsProps> {
@@ -31,9 +32,11 @@ const mapStateToProps: MapStateToProps<FruitsStateProps, FruitsOwnProps, ReturnT
   };
 };
 
-const mapDispatchToProps: MapDispatchToPropsFunction<FruitsDispatchProps, FruitsOwnProps> = (dispatch, ownProps) => {
+const mapDispatchToProps: MapDispatchToPropsFunction<FruitsDispatchProps, FruitsOwnProps> = (dispatch: any, ownProps) => {
+  const fruitsActions = new FruitsActions();
+  
   return {
-    addFruits: (fruits) => dispatch({ type: 'ADD_FRUITS', fruits }),
+    addFruits: (fruits) => dispatch(fruitsActions.addFruits(fruits)),
   };
 };
 
