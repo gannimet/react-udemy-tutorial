@@ -1,4 +1,5 @@
 import { AnyAction, Middleware, Store } from 'redux';
+import { createSelector } from 'reselect';
 import { StoreStateType } from '../reducers/rootReducer';
 
 export type CustomMiddlewareFunction<S, R> = (store: Store<S>) => R;
@@ -15,3 +16,10 @@ export const customMiddleware: Middleware<{}, StoreStateType, CustomDispatch<Sto
     next(action);
   }
 };
+
+export const fruitsWithO = createSelector<StoreStateType, string[], string[]>(
+  (state) => state.fruits,
+  (fruits) => {
+    return fruits.filter((fruit) => fruit.toLowerCase().includes('o'));
+  }
+);
