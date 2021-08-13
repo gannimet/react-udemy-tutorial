@@ -2,6 +2,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { applyMiddleware, createStore } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import './App.css';
 import AboutPage from './components/AboutPage';
 import HomePage from './components/HomePage';
@@ -12,7 +13,7 @@ import { rootReducer } from './store/reducers/rootReducer';
 const store = createStore(rootReducer, {
   users: ['Richard', 'Konstantin'],
   fruits: ['apple', 'avocado']
-}, applyMiddleware(customMiddleware, anotherMiddleware));
+}, composeWithDevTools(applyMiddleware(customMiddleware, anotherMiddleware)));
 
 const App: React.FC = () => {
   return (
