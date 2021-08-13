@@ -6,3 +6,5 @@ export const rootReducer = combineReducers({
   fruits: fruitsReducer,
   users: usersReducer,
 });
+
+export type StoreStateType = ReturnType<typeof rootReducer>;

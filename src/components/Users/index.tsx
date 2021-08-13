@@ -1,6 +1,9 @@
 import React from 'react';
-import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
-import { rootReducer } from '../../store/reducers/rootReducer';
+import { connect, MapStateToProps } from 'react-redux';
+import UsersActions from '../../store/actions/usersActions';
+import { CustomDispatch } from '../../store/middleware/customMiddleware';
+import { rootReducer, StoreStateType } from '../../store/reducers/rootReducer';
+import { UsersReducerAction } from '../../store/reducers/usersReducer';
 import { UsersDispatchProps, UsersOwnProps, UsersProps, UsersStateProps } from './interface';
 
 class Users extends React.Component<UsersProps> {
@@ -31,9 +34,11 @@ const mapStateToProps: MapStateToProps<UsersStateProps, UsersOwnProps, ReturnTyp
   };
 };
 
-const mapDispatchToProps: MapDispatchToPropsFunction<UsersDispatchProps, UsersOwnProps> = (dispatch, ownProps) => {
+const mapDispatchToProps = (dispatch: CustomDispatch<StoreStateType, UsersReducerAction>, ownProps: UsersOwnProps): UsersDispatchProps => {
+  const usersActions = new UsersActions();
+
   return {
-    addUsers: (users) => dispatch({ type: 'ADD_USERS', users }),
+    addUsers: (users) => dispatch(usersActions.addUsers(users)),
   };
 };
 

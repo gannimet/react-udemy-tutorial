@@ -1,13 +1,14 @@
-import { Middleware, Store } from 'redux';
+import { AnyAction, Middleware, Store } from 'redux';
+import { StoreStateType } from '../reducers/rootReducer';
 
-export type CustomMiddlewareFunction = (store: Store) => any;
+export type CustomMiddlewareFunction<S, R> = (store: Store<S>) => R;
 
-export interface CustomDispatch {
+export interface CustomDispatch<S, R> {
   <T>(action: T): T;
-  (param: CustomMiddlewareFunction): any;
+  (param: CustomMiddlewareFunction<S, R>): any;
 }
 
-export const customMiddleware: Middleware = (store) => (next) => (action) => {
+export const customMiddleware: Middleware<{}, StoreStateType, CustomDispatch<StoreStateType, AnyAction>> = (store) => (next) => (action) => {
   if (typeof action === 'function') {
     next(action(store));
   } else {
