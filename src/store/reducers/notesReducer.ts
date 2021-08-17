@@ -1,28 +1,12 @@
 import { Reducer } from 'redux';
-import { NotesActionType } from '../actions/notesActions';
+import {
+  AddNoteAction,
+  DeleteNoteAction,
+  EditNoteAction,
+  NotesActionType,
+  NotesReducerAction
+} from '../actions/notesActions';
 import { Note } from '../models/note';
-
-export interface NotesReducerAction {
-  readonly type: NotesActionType;
-}
-
-export class AddNoteAction implements NotesReducerAction {
-  readonly type = NotesActionType.AddNote;
-  
-  constructor(public note: Note) {}
-}
-
-export class DeleteNoteAction implements NotesReducerAction {
-  readonly type = NotesActionType.DeleteNode;
-  
-  constructor(public note: Note) {}
-}
-
-export class EditNoteAction implements NotesReducerAction {
-  readonly type = NotesActionType.EditNode;
-  
-  constructor(public oldNote: Note, public newNote: Note) {}
-}
 
 export const notesReducer: Reducer<Note[], NotesReducerAction> = (state = [], action): Note[] => {
   const newState = [...state];

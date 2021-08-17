@@ -17,6 +17,6 @@ export type HomePageProps = HomePageOwnProps & HomePageStateProps & HomePageDisp
 export interface HomePageState {
   showEditNoteModal: boolean;
   showDeleteNoteModal: boolean;
-  editingNote: Note | undefined;
-  deletingNote: Note | undefined;
+  showViewNoteModal: boolean;
+  selectedNote: Note | undefined;
 }

@@ -1,12 +1,12 @@
 import React, { Dispatch } from 'react';
 import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
-import { NotesActionType } from '../../store/actions/notesActions';
+import { AddNoteAction, DeleteNoteAction, EditNoteAction, NotesActionType, NotesReducerAction } from '../../store/actions/notesActions';
 import { Note } from '../../store/models/note';
-import { AddNoteAction, DeleteNoteAction, EditNoteAction, NotesReducerAction } from '../../store/reducers/notesReducer';
 import { StoreStateType } from '../../store/reducers/rootReducer';
 import Button from '../Button';
 import DeleteNoteModal from '../DeleteNoteModal';
-import NoteModal from '../NoteModal';
+import EditNoteModal from '../EditNoteModal';
+import ViewNoteModal from '../ViewNoteModal';
 import { HomePageDispatchProps, HomePageOwnProps, HomePageProps, HomePageState, HomePageStateProps } from './interface';
 import './style.css';
 
@@ -17,15 +17,15 @@ class HomePage extends React.Component<HomePageProps, HomePageState> {
     this.state = {
       showEditNoteModal: false,
       showDeleteNoteModal: false,
-      editingNote: undefined,
-      deletingNote: undefined,
+      showViewNoteModal: false,
+      selectedNote: undefined,
     };
   }
 
-  openNoteModal = (editingNote?: Note) => {
+  openEditNoteModal = (editingNote?: Note) => {
     this.setState({
       showEditNoteModal: true,
-      editingNote,
+      selectedNote: editingNote,
     })
   }
 
@@ -39,39 +39,60 @@ class HomePage extends React.Component<HomePageProps, HomePageState> {
     event.stopPropagation();
     this.setState({
       showDeleteNoteModal: true,
-      deletingNote: note,
+      selectedNote: note,
     })
   }
 
   closeDeleteNoteModal = () => {
     this.setState({
       showDeleteNoteModal: false,
-      deletingNote: undefined,
+      selectedNote: undefined,
+    })
+  }
+
+  openViewNoteModal = (note: Note) => {
+    this.setState({
+      showViewNoteModal: true,
+      selectedNote: note,
+    })
+  }
+
+  closeViewNoteModal = (openEditModal: boolean) => {
+    this.setState({
+      showViewNoteModal: false,
+      showEditNoteModal: openEditModal,
+      selectedNote: openEditModal ? this.state.selectedNote : undefined,
     })
   }
 
   handleNoteModalSave = (note: Note) => {
-    const { editingNote } = this.state;
+    const { selectedNote } = this.state;
 
     this.setState({
       showEditNoteModal: false,
-      editingNote: undefined,
+      selectedNote: undefined,
     })
 
-    if (editingNote) {
-      this.props.editNode(editingNote, note);
+    if (selectedNote) {
+      this.props.editNode(selectedNote, note);
     } else {
       this.props.addNote(note);
     }
   }
 
-  handleDeleteNote = (note: Note) => {
+  handleDeleteNote = () => {
+    const { selectedNote } = this.state;
+
+    if (!selectedNote) {
+      return;
+    }
+
+    this.props.deleteNote(selectedNote);
+
     this.setState({
       showDeleteNoteModal: false,
-      deletingNote: undefined,
+      selectedNote: undefined,
     })
-
-    this.props.deleteNote(note);
   }
 
   private formatDate(date: Date): string {
@@ -79,33 +100,44 @@ class HomePage extends React.Component<HomePageProps, HomePageState> {
   }
 
   render() {
-    const { showEditNoteModal, showDeleteNoteModal, editingNote, deletingNote } = this.state;
+    const {
+      showEditNoteModal,
+      showDeleteNoteModal,
+      showViewNoteModal,
+      selectedNote
+    } = this.state;
     const { notes } = this.props;
 
     return (
       <div>
         <h1>My Notes</h1>
 
-        {showEditNoteModal && <NoteModal
+        {showViewNoteModal && selectedNote && <ViewNoteModal
+          show={showViewNoteModal}
+          note={selectedNote}
+          onClose={() => this.closeViewNoteModal(false)}
+          onEditButtonClick={() => this.closeViewNoteModal(true)} />}
+
+        {showEditNoteModal && <EditNoteModal
           show={showEditNoteModal}
           onClose={this.closeEditNoteModal}
           onSave={this.handleNoteModalSave}
-          note={editingNote} />}
+          note={selectedNote} />}
 
-        {showDeleteNoteModal && deletingNote && <DeleteNoteModal
+        {showDeleteNoteModal && selectedNote && <DeleteNoteModal
           show={showDeleteNoteModal}
           onClose={this.closeDeleteNoteModal}
-          onConfirmDelete={(note) => this.handleDeleteNote(note)}
-          note={deletingNote} />}
+          onConfirmDelete={this.handleDeleteNote}
+          note={selectedNote} />}
 
-        <Button onClick={() => this.openNoteModal()}>Add Note</Button>
+        <Button onClick={() => this.openEditNoteModal()}>Add Note</Button>
         <ul className="notes-list">
           {notes.map((note) => {
             return (
               <li
                 key={`${note.title}-${note.description}`}
                 className="notes-list-item"
-                onClick={() => this.openNoteModal(note)}>
+                onClick={() => this.openViewNoteModal(note)}>
                 <div className="notes-list-item__header-row">
                   <h2>{note.title}</h2>
                   <img

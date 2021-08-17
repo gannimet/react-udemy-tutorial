@@ -4,11 +4,11 @@ import Button from '../Button';
 import Input from '../Input';
 import Modal from '../Modal';
 import Textarea from '../Textarea';
-import { NoteModalProps, NoteModalState } from './interface';
+import { EditNoteModalProps, EditNoteModalState } from './interface';
 import './style.css';
 
-class NoteModal extends React.Component<NoteModalProps, NoteModalState> {
-  constructor(props: NoteModalProps) {
+class EditNoteModal extends React.Component<EditNoteModalProps, EditNoteModalState> {
+  constructor(props: EditNoteModalProps) {
     super(props);
 
     this.state = {
@@ -18,12 +18,12 @@ class NoteModal extends React.Component<NoteModalProps, NoteModalState> {
   }
 
   handleInputChange = (
-    key: keyof NoteModalState,
+    key: keyof EditNoteModalState,
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     this.setState({
       [key]: event.currentTarget.value,
-    } as Pick<NoteModalState, keyof NoteModalState>)
+    } as Pick<EditNoteModalState, keyof EditNoteModalState>)
   }
 
   handleSubmit = () => {
@@ -80,4 +80,4 @@ class NoteModal extends React.Component<NoteModalProps, NoteModalState> {
   }
 }
 
-export default NoteModal;
+export default EditNoteModal;

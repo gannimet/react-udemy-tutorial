@@ -20,7 +20,7 @@ const DeleteNoteModal: React.FC<DeleteNoteModalProps> = ({
 
       <div className="button-row">
         <Button type="secondary" onClick={onClose}>Cancel</Button>
-        <Button type="primary" onClick={() => onConfirmDelete(note)}>Delete</Button>
+        <Button type="primary" onClick={onConfirmDelete}>Delete</Button>
       </div>
     </Modal>
   )

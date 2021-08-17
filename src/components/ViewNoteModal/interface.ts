@@ -1,8 +1,8 @@
 import { Note } from '../../store/models/note';
 
-export interface DeleteNoteModalProps {
+export interface ViewNoteModalProps {
   note: Note;
-  onConfirmDelete(): void;
   show: boolean;
+  onEditButtonClick(): void;
   onClose(): void;
 }
