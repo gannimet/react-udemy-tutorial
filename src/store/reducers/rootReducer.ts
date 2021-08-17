@@ -1,10 +1,8 @@
 import { combineReducers } from 'redux';
-import { fruitsReducer } from './fruitsReducer';
-import { usersReducer } from './usersReducer';
+import { notesReducer } from './notesReducer';
 
 export const rootReducer = combineReducers({
-  fruits: fruitsReducer,
-  users: usersReducer,
+  notes: notesReducer,
 });
 
 export type StoreStateType = ReturnType<typeof rootReducer>;

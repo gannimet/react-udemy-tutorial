@@ -1,0 +1,45 @@
+.notes-list {
+  list-style: none;
+  padding: 0;
+  width: 400px;
+}
+
+@media (max-width: 500px) {
+  .notes-list {
+    width: 100%;
+  }
+}
+
+.notes-list .notes-list-item {
+  padding: 16px;
+}
+
+.notes-list .notes-list-item .notes-list-item__header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.notes-list .notes-list-item .notes-list-item__header-row h2 {
+  margin: 0;
+}
+
+.notes-list .notes-list-item .notes-list-item__header-row .delete-note-icon {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.notes-list .notes-list-item:nth-child(2n) {
+  background-color: #eee;
+}
+
+.notes-list .notes-list-item:nth-child(2n+1) {
+  background-color: #ddd;
+}
+
+.notes-list .notes-list-item .note-last-modified {
+  font-size: 13px;
+  color: #888;
+  text-align: right;
+}

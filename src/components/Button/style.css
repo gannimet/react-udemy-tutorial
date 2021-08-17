@@ -1,0 +1,31 @@
+button {
+  padding: 8px 12px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 3px;
+  box-shadow: 5px 5px 18px -8px rgba(0,0,0,0.75);
+  -webkit-box-shadow: 5px 5px 18px -8px rgba(0,0,0,0.75);
+  -moz-box-shadow: 5px 5px 18px -8px rgba(0,0,0,0.75);
+  cursor: pointer;
+}
+
+button.button-default {
+  background-color: rgb(17, 128, 255);
+  color: white;
+}
+
+button.button-secondary {
+  background-color: #dfdfdf;
+  color: #000;
+}
+
+button.button-primary {
+  background-color: #0EB505;
+  color: white;
+}
+
+button:disabled {
+  opacity: 0.4;
+  cursor: initial;
+}
