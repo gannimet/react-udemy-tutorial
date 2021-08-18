@@ -10,10 +10,11 @@ import { anotherMiddleware } from './store/middleware/anotherMiddleware';
 import { customMiddleware } from './store/middleware/customMiddleware';
 import { rootReducer } from './store/reducers/rootReducer';
 
-const store = createStore(rootReducer, {
-  users: ['Richard', 'Konstantin'],
-  fruits: ['apple', 'avocado']
-}, composeWithDevTools(applyMiddleware(customMiddleware, anotherMiddleware)));
+const store = createStore(
+  rootReducer,
+  (window as any).initialState,
+  composeWithDevTools(applyMiddleware(customMiddleware, anotherMiddleware))
+);
 
 const App: React.FC = () => {
   return (
