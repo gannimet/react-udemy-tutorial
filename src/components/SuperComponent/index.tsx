@@ -1,31 +1,26 @@
 import React, { useRef, useState } from 'react';
+import ChildComponent from '../ChildComponent';
+import { ChildCompRef } from '../ChildComponent/interface';
 
 const SuperComponent: React.FC = () => {
   const [counter, setCounter] = useState(0);
-  // const [buttonWidth, setButtonWidth] = useState(0);
-  const buttonRef = useRef<HTMLButtonElement | null>(null);
-  let instanceVariable = useRef(0);
+  const childCompRef = useRef<ChildCompRef>(null);
 
   const handleButtonClick = () => {
-    instanceVariable.current += 1;
     setCounter(counter + 1);
   };
 
-  // const buttonCallbackRef = (element: HTMLButtonElement | null) => {
-  //   console.log('ref element:', element);
-  //   if (element !== null) {
-  //     setButtonWidth(element.clientWidth);
-  //   }
-  // };
-
+  const handleChildButtonClick = () => {
+    childCompRef.current?.handleButtonClick();
+  };
+  
   return (
     <div className="App">
       <h1>Super Component</h1>
       <p>Counter: {counter}</p>
-      <p>Instance Variable: {instanceVariable.current}</p>
-      {/* <p>Button width: {buttonWidth}</p> */}
-      {/* <button ref={buttonCallbackRef} onClick={handleButtonClick}>Update Counter</button> */}
-      <button ref={buttonRef} onClick={handleButtonClick}>Update Counter</button>
+      <button onClick={handleButtonClick}>Update Counter</button>
+      <button onClick={handleChildButtonClick}>Update Child Component Counter</button>
+      <ChildComponent ref={childCompRef} />
     </div>
   )
 };
