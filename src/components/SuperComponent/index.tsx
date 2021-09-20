@@ -1,26 +1,27 @@
-import React, { useRef, useState } from 'react';
-import ChildComponent from '../ChildComponent';
-import { ChildCompRef } from '../ChildComponent/interface';
+import React, { useState } from 'react';
+import { useEffectOnUpdate } from '../../hooks/useEffectOnUpdate';
+import { usePrevious } from '../../hooks/usePrevious';
 
 const SuperComponent: React.FC = () => {
   const [counter, setCounter] = useState(0);
-  const childCompRef = useRef<ChildCompRef>(null);
-
+  const previousValue = usePrevious(counter);
+  
   const handleButtonClick = () => {
     setCounter(counter + 1);
   };
 
-  const handleChildButtonClick = () => {
-    childCompRef.current?.handleButtonClick();
-  };
+  useEffectOnUpdate(() => {
+    console.log('Previous value:', previousValue);
+    console.log('Current value:', counter);
+    console.log('Component did update');
+    console.log('---');
+  });
   
   return (
     <div className="App">
       <h1>Super Component</h1>
       <p>Counter: {counter}</p>
       <button onClick={handleButtonClick}>Update Counter</button>
-      <button onClick={handleChildButtonClick}>Update Child Component Counter</button>
-      <ChildComponent ref={childCompRef} />
     </div>
   )
 };
